@@ -7,6 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+
 import { ElectronicsportsApiModule } from '#shared/electronicsports-api/electronicsports-api.module';
 
 import states from '#store/app.states';
