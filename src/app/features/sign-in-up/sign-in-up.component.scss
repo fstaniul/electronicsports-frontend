@@ -1,0 +1,14 @@
+@import 'src/styles/vars';
+
+.form-container {
+  width: 100%;
+
+  @media (min-width: 500px) {
+    max-width: 500px;
+    width: 500px;
+  }
+}
+
+.logo {
+  width: 100%;
+}

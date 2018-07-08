@@ -1,10 +1,9 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[appInputAppend]'
+  selector: '[appInputAppend]',
 })
 export class InputAppendDirective {
-
-  constructor() { }
-
+  @HostBinding('class') clazz = 'input-group-append';
+  constructor() {}
 }

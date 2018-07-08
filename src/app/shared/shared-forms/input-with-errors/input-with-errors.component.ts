@@ -1,15 +1,17 @@
-import { Component, Input, ViewChild, ElementRef, Self, Host } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Self, Host, Optional, forwardRef } from '@angular/core';
 import { NgControl, ControlValueAccessor } from '@angular/forms';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { TranslatePrefixDirective } from '#shared/shared/directives/translate-prefix.directive';
+import { COMPONENT_WITH_PLACEHOLDER, ComponentWithPlaceholder } from '#shared/shared-forms/directives/translate-placeholder.directive';
 
 @Component({
   selector: 'app-input-with-errors',
   templateUrl: './input-with-errors.component.html',
   styleUrls: ['./input-with-errors.component.scss'],
+  providers: [{ provide: COMPONENT_WITH_PLACEHOLDER, useExisting: forwardRef(() => InputWithErrorsComponent) }],
 })
-export class InputWithErrorsComponent implements ControlValueAccessor {
+export class InputWithErrorsComponent implements ControlValueAccessor, ComponentWithPlaceholder {
   @ViewChild('input') input: ElementRef;
 
   @Input() type = 'text';
@@ -24,7 +26,12 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
 
   @Input() errorIcon = faTimes;
 
-  constructor(@Self() private ngControl: NgControl, @Host() private translatePrefix: TranslatePrefixDirective) {
+  constructor(
+    @Self() public ngControl: NgControl,
+    @Optional()
+    @Host()
+    private translatePrefix: TranslatePrefixDirective
+  ) {
     ngControl.valueAccessor = this;
   }
 
@@ -46,8 +53,8 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
 
   get classes() {
     return {
-      'is-invalid': this.ngControl.control.invalid && this.showInvalid,
-      'is-valid': this.ngControl.control.valid && this.showValid,
+      'is-invalid': this.ngControl.control.invalid && this.showInvalid && (this.ngControl.touched || this.ngControl.dirty),
+      'is-valid': this.ngControl.control.valid && this.showValid && (this.ngControl.touched || this.ngControl.dirty),
     };
   }
 
@@ -56,6 +63,6 @@ export class InputWithErrorsComponent implements ControlValueAccessor {
     if (this.translatePrefix && this.translatePrefix.prefix) {
       return errors.map((e) => `${this.translatePrefix.prefix}.${this.ngControl.name}.errors.${e}`);
     }
-    return Object.values(this.ngControl.errors);
+    return errors;
   }
 }

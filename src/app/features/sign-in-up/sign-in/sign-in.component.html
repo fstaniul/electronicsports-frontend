@@ -1,0 +1,43 @@
+<h3 class="text-center font-weight-light mb-3">{{'sign-in-up.sign-in.heading' | translate}}</h3>
+<form [formGroup]="singInForm" appTranslatePrefix="sign-in-up.sign-in.form">
+  <div class="form-group">
+    <app-input-with-errors formControlName="username" appTranslatePlaceholder>
+      <div appInputPrepend class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="userIcon"></fa-icon>
+        </div>
+      </div>
+    </app-input-with-errors>
+  </div>
+  <div class="form-group">
+    <app-input-with-errors formControlName="password" [type]="passwordType" appTranslatePlaceholder>
+      <div appInputPrepend class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="passwordIcon"></fa-icon>
+        </div>
+      </div>
+      <div appInputAppend class="input-group-append">
+        <button class="btn" (mousedown)="showPassword()" (mouseup)="hidePassword()" (mouseleave)="hidePassword()" [class.btn-secondary]="passwordType === 'password'"
+          [class.btn-danger]="passwordType !== 'password'">
+          <fa-icon [icon]="showPasswordIcon"></fa-icon>
+        </button>
+      </div>
+    </app-input-with-errors>
+  </div>
+  <div class="form-group">
+    <div class="form-row">
+      <div class="col-6">
+        <button class="btn btn-primary btn-block">
+          <fa-icon [icon]="signInIcon"></fa-icon>
+          {{'sign-in-up.sign-in.form.sign-in' | translate}}
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-outline-secondary btn-block">
+          <fa-icon [icon]="resetPasswordIcon"></fa-icon>
+          {{'sign-in-up.sign-in.form.reset-password' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

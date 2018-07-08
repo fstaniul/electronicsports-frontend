@@ -1,10 +1,9 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[appInputPrepend]'
+  selector: '[appInputPrepend]',
 })
 export class InputPrependDirective {
-
-  constructor() { }
-
+  @HostBinding('class') clazz = 'input-group-prepend';
+  constructor() {}
 }

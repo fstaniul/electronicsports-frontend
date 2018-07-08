@@ -3,8 +3,10 @@
   <input [type]="type" [placeholder]="placeholder" class="form-control" [ngClass]="classes" #input>
   <ng-content select="[appInputAppend]"></ng-content>
 </div>
-<div *ngIf="errors.length > 0">
+<div *ngIf="errors.length > 0 && (ngControl.touched || ngControl.dirty)">
   <div class="text-danger form-text" *ngFor="let error of errors">
-    <fa-icon [icon]="errorIcon"></fa-icon> {{ error | translate }}
+    <small>
+      <fa-icon [icon]="errorIcon"></fa-icon> {{ error | translate }}
+    </small>
   </div>
 </div>
