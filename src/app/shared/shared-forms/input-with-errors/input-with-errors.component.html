@@ -1,0 +1,10 @@
+<div class="input-group">
+  <ng-content select="[appInputPrepend]"></ng-content>
+  <input [type]="type" [placeholder]="placeholder" class="form-control" [ngClass]="classes" #input>
+  <ng-content select="[appInputAppend]"></ng-content>
+</div>
+<div *ngIf="errors.length > 0">
+  <div class="text-danger form-text" *ngFor="let error of errors">
+    <fa-icon [icon]="errorIcon"></fa-icon> {{ error | translate }}
+  </div>
+</div>

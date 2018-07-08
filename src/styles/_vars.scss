@@ -1,0 +1,14 @@
+$primary: #4c92ec;
+$secondary: #959595;
+$info: #ffc0cb;
+$light: #f3f3f3;
+$dark: #333;
+
+$body-bg: #111;
+$body-color: $light;
+
+$link-hover-decoration: none;
+
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';

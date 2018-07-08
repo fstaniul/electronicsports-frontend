@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app.routing';
 import { ElectronicsportsApiModule } from '#shared/electronicsports-api/electronicsports-api.module';
 
 import states from '#store/app.states';
+import { SharedModule } from '#shared/shared/shared.module';
 
 export function translateLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, '/assets/i18n/', '.json');
@@ -29,8 +30,9 @@ export function translateLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    ElectronicsportsApiModule.forRoot(),
     NgxsModule.forRoot(states),
+    ElectronicsportsApiModule.forRoot(),
+    SharedModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
